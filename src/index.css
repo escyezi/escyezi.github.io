@@ -1,0 +1,54 @@
+@import "../styles/globals.css";
+
+@layer base {
+  :root {
+    @apply font-sans;
+  }
+
+  body {
+    @apply grid place-items-center min-w-[320px] min-h-screen relative m-0 bg-background text-foreground;
+  }
+}
+
+/* subtle bubble background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.18;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.22), transparent 55%),
+    radial-gradient(circle at 78% 30%, rgba(167, 139, 250, 0.18), transparent 58%),
+    radial-gradient(circle at 62% 82%, rgba(34, 211, 238, 0.14), transparent 60%),
+    radial-gradient(circle at 30% 78%, rgba(96, 165, 250, 0.12), transparent 62%);
+  transform: translate3d(0, 0, 0);
+  animation: drift 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-2%, -1%, 0) scale(1.02);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+  }
+}
